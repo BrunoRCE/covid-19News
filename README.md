@@ -12,4 +12,8 @@ Mobile application to view the latest news about covid-19
 
 ## Screenshots
 
-![alt text](https://github.com/BrunoRCE/SimplePokedex/blob/master/pokedex.png)
+![alt text](https://github.com/BrunoRCE/covid-19News/blob/master/sc1.png)
+
+![alt text](https://github.com/BrunoRCE/covid-19News/blob/master/sc2.png)
+
+![alt text](https://github.com/BrunoRCE/covid-19News/blob/master/sc3.png)
