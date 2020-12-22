@@ -7,6 +7,9 @@ Mobile application to view the latest news about covid-19
 * Clean architecture
 * ViewModel
 * LiveData
+* CardView
+* RecyclerView
+* Swipe Refreshlayout
 * Jsoup
 * Coroutines
 
@@ -15,8 +18,4 @@ Jsoup is used to extract the information that the google search engine returns i
 
 ## Screenshots
 
-[<img src="https://github.com/BrunoRCE/covid-19News/blob/master/sc1.png" width=160>](https://github.com/BrunoRCE/covid-19News/blob/master/sc1.png)
-
-[<img src="https://github.com/BrunoRCE/covid-19News/blob/master/sc2.png" width=160>](https://github.com/BrunoRCE/covid-19News/blob/master/sc2.png)
-
-[<img src="https://github.com/BrunoRCE/covid-19News/blob/master/sc3.png" width=160>](https://github.com/BrunoRCE/covid-19News/blob/master/sc3.png)
+[<img src="https://github.com/BrunoRCE/covid-19News/blob/master/sc1.png" width=160>](https://github.com/BrunoRCE/covid-19News/blob/master/sc1.png) [<img src="https://github.com/BrunoRCE/covid-19News/blob/master/sc2.png" width=160>](https://github.com/BrunoRCE/covid-19News/blob/master/sc2.png) [<img src="https://github.com/BrunoRCE/covid-19News/blob/master/sc3.png" width=160>](https://github.com/BrunoRCE/covid-19News/blob/master/sc3.png)
