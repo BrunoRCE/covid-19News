@@ -4,6 +4,7 @@ import com.brunocamacho.covid19news.domain.entity.News
 import com.brunocamacho.covid19news.domain.repository.NewsRepository
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
+import java.util.*
 
 class NewsJsoup : NewsRepository {
 
@@ -22,7 +23,7 @@ class NewsJsoup : NewsRepository {
     }
 
     private fun capitalizeText(text: String): String {
-        return text.substring(0, 1).toUpperCase() + text.substring(1);
+        return text.substring(0, 1).toUpperCase(Locale.ROOT) + text.substring(1);
     }
 
     private fun removeDashes(text: String): String {
