@@ -6,7 +6,7 @@ import com.brunocamacho.covid19news.databinding.NoteActivityBinding
 
 class NoteActivity : AppCompatActivity() {
 
-    private lateinit var binding:NoteActivityBinding
+    private lateinit var binding: NoteActivityBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -14,13 +14,12 @@ class NoteActivity : AppCompatActivity() {
         binding = NoteActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val url = intent.extras?.getString("url")
-
         binding.webview.settings.javaScriptEnabled = true
 
-        if (url != null) {
-            binding.webview.loadUrl(url)
+        intent.extras?.let { extras ->
+            extras.getString("url")?.let { url ->
+                binding.webview.loadUrl(url)
+            }
         }
-
     }
 }

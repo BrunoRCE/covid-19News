@@ -1,7 +1,7 @@
 package com.brunocamacho.covid19news.data
 
-import com.brunocamacho.covid19news.domain.News
-import com.brunocamacho.covid19news.domain.NewsRepository
+import com.brunocamacho.covid19news.domain.entity.News
+import com.brunocamacho.covid19news.domain.repository.NewsRepository
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 

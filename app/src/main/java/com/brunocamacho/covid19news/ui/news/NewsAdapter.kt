@@ -7,7 +7,7 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.brunocamacho.covid19news.R
-import com.brunocamacho.covid19news.domain.News
+import com.brunocamacho.covid19news.domain.entity.News
 
 class NewsAdapter(news: MutableList<News>, clickListener: ClickListener) :
     RecyclerView.Adapter<NewsAdapter.ViewHolder>() {

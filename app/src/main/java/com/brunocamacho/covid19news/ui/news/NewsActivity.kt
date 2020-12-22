@@ -2,21 +2,21 @@ package com.brunocamacho.covid19news.ui.news
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.brunocamacho.covid19news.R
 import com.brunocamacho.covid19news.data.NewsJsoup
 import com.brunocamacho.covid19news.databinding.NewsActivityBinding
-import com.brunocamacho.covid19news.domain.GetNews
-import com.brunocamacho.covid19news.domain.News
+import com.brunocamacho.covid19news.domain.entity.News
+import com.brunocamacho.covid19news.domain.useCase.GetNews
 import com.brunocamacho.covid19news.ui.note.NoteActivity
 
-class NewsActivity : AppCompatActivity(), NewsView, NewsAdapter.ClickListener {
+class NewsActivity : AppCompatActivity(), NewsAdapter.ClickListener {
 
     private lateinit var binding: NewsActivityBinding
     private lateinit var adapter: NewsAdapter
     private lateinit var news: MutableList<News>
-    private lateinit var presenter: NewsPresenter
+    private lateinit var viewModel: NewsViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,26 +32,22 @@ class NewsActivity : AppCompatActivity(), NewsView, NewsAdapter.ClickListener {
         binding.list.setHasFixedSize(true)
         binding.list.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
+        viewModel = NewsViewModel(GetNews(NewsJsoup()))
+        viewModel.getData()
+
         binding.refresh.setOnRefreshListener {
-            presenter.onCreate()
+            viewModel.getData()
         }
 
-        presenter = NewsPresenter(this, GetNews(NewsJsoup()))
-        presenter.onCreate()
-    }
+        viewModel.progress.observe(this, { visibility ->
+            binding.refresh.isRefreshing = visibility
+        })
 
-    override fun showProgress(show: Boolean) {
-        binding.refresh.isRefreshing = show
-    }
-
-    override fun setList(news: MutableList<News>) {
-        this.news.clear()
-        this.news.addAll(news)
-        adapter.notifyDataSetChanged()
-    }
-
-    override fun showError(error: String) {
-        Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
+        viewModel.news.observe(this, { news ->
+            this.news.clear()
+            this.news.addAll(news)
+            adapter.notifyDataSetChanged()
+        })
     }
 
     override fun onItemClick(position: Int) {
@@ -68,6 +64,6 @@ class NewsActivity : AppCompatActivity(), NewsView, NewsAdapter.ClickListener {
             type = "text/plain"
         }
 
-        startActivity(Intent.createChooser(shareIntent, ""))
+        startActivity(Intent.createChooser(shareIntent, getString(R.string.share)))
     }
 }
