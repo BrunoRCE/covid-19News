@@ -7,14 +7,37 @@ import org.jsoup.nodes.Document
 
 class NewsJsoup : NewsRepository {
 
+    private fun getIndexInfo(list: List<String>): Int {
+        var index = list.lastIndex
+
+        while (!list.get(index).contains("-")) {
+            index--
+            if (index < 0) {
+                index = 0
+                break
+            }
+        }
+
+        return index
+    }
+
+    private fun capitalizeText(text: String): String {
+        return text.substring(0, 1).toUpperCase() + text.substring(1);
+    }
+
+    private fun removeDashes(text: String): String {
+        return text.replace("-", " ")
+    }
+
     override fun findAll(): MutableList<News> {
 
         val url = "https://www.google.com/search?q=covid&tbm=nws"
+
+        val news: MutableList<News> = mutableListOf()
+
         val document: Document = Jsoup.connect(url).get()
 
         val elements = document.select("a")
-
-        val news: MutableList<News> = mutableListOf()
 
         elements.forEach { element ->
 
@@ -22,23 +45,13 @@ class NewsJsoup : NewsRepository {
 
             if (!url.contains("google") && url.contains("http")) {
 
-                val titles = url.split("/")
-
-                var i = titles.lastIndex
-
-                while (!titles.get(i).contains("-")) {
-                    i--
-                    if (i < 0) {
-                        i = 0
-                        break
-                    }
-                }
+                val parts = url.split("/")
 
                 news.add(
                     News(
                         url,
-                        titles.get(2),
-                        titles.get(i).replace("-"," ")
+                        parts.get(2),
+                        capitalizeText(removeDashes(parts.get(getIndexInfo(parts))))
                     )
                 )
             }
